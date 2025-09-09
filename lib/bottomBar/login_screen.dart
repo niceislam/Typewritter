@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:bottombar/bottomBar/Home_screen.dart';
 import 'package:bottombar/bottomBar/widget_all.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +12,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController passcontroller = TextEditingController();
   final mykey = GlobalKey<FormState>();
+  bool tapIcon = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,35 +68,75 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         LoginTextfield(
+                          controller: emailcontroller,
                           hinttext: "Your Email",
                           preIcon: Icon(Icons.mail_outline, size: 28),
                           validator: (value) {
                             if (value == null || value == "") {
                               return "Field can't be empty";
-                            } else if (value.contains("@") ||
+                            } else if (!value.contains("@") ||
                                 !value.contains(".")) {
                               return "Wrong email";
+                            } else if (value == "nice@gmail.com") {
+                              return "";
+                            } else {
+                              return "wrong user";
                             }
                           },
+                          obsecuretext: false,
                         ),
                         SizedBox(height: 25),
                         LoginTextfield(
-
+                          controller: passcontroller,
                           hinttext: "Password",
                           preIcon: Icon(Icons.lock_outline, size: 28),
+                          validator: (value) {
+                            if (value == null || value == "") {
+                              return "Field can't be empty";
+                            } else if (value == "12345678") {
+                              return "";
+                            } else if (value.length > 8){
+                              return "please short password";
+                            }else{return "wrong user";}
+                          },
+                          obsecuretext: !tapIcon,
                         ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            textAlign: TextAlign.end,
-                            "Forgot password",
-                            style: TextStyle(color: Colors.blue, fontSize: 16),
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Checkbox(
+                                  activeColor: Colors.blue,
+                                  value: tapIcon,
+                                  onChanged: (value) {
+                                    tapIcon = !tapIcon;
+                                    setState(() {});
+                                  },
+                                ),
+                                Text("Show password"),
+                              ],
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                textAlign: TextAlign.end,
+                                "Forgot password",
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: 50),
                         InkWell(
-                          onTap: (){
-                            if(mykey.currentState!.validate()){
+                          onTap: () {
+                            log(
+                              "==============${emailcontroller.text}==============${passcontroller.text}",
+                            );
+                            if (mykey.currentState!.validate()) {
                               return;
                             }
                           },

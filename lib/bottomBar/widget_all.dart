@@ -85,26 +85,26 @@ class LoginTextfield extends StatelessWidget {
     this.preIcon,
     this.validator,
     this.controller,
-
-    this.suficonontap,
+    this.sufixIcon, required this.obsecuretext,
   });
   final String? hinttext;
   final Icon? preIcon;
   final FormFieldValidator? validator;
   final TextEditingController? controller;
-  // final bool obsecuretext;
-  // final Icon? sufixIcon;
-  final VoidCallback? suficonontap;
+  final bool obsecuretext;
+  final Icon? sufixIcon;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      cursorHeight: 25,
+      cursorColor: Colors.blue,
+      obscureText: obsecuretext,
       controller: controller,
       decoration: InputDecoration(
         hintText: "${hinttext}",
         prefixIcon: preIcon,
-        suffixIcon: InkWell(
-            child: Icon(Icons.visibility)),
+        suffixIcon: sufixIcon,
         fillColor: Colors.black.withOpacity(0.12),
         filled: true,
         border: OutlineInputBorder(
