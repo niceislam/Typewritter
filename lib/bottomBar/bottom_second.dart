@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:bottombar/bottomBar/Home_screen.dart';
 import 'package:bottombar/bottomBar/widget_all.dart';
 import 'package:flutter/material.dart';
 
@@ -11,21 +12,19 @@ class BottomSecond extends StatefulWidget {
 }
 
 class _BottomSecondState extends State<BottomSecond> {
-  String? dropdownValue;
-
-  final List<String> items = <String>[
-    'Apple',
-    'Banana',
-    'Orange',
-    'Grape'
-  ];
   int selectedvalue = 1;
+  String? selectedItem;
+  String? selectedage;
+  List<String> gender = ["Male", "Female", "Others"];
+  List<String> age = ["-10", "18+", "45+"];
+  List droppage = [HomeScreen()];
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 10, right: 10, left: 10),
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 5,
           children: [
             RadioButtonCard(
@@ -35,21 +34,67 @@ class _BottomSecondState extends State<BottomSecond> {
               op3: 'Singapore',
               op4: 'Canada',
             ),
-        DropdownButton<String>(
-          hint: Text("choose"),
-          value: dropdownValue,
-          items: items.map((v) {
-            return DropdownMenuItem(
-              value: v,
-              child: Text(v),
-            );
-          }).toList(),
-          onChanged: (v) {
-            setState(() {
-              dropdownValue = v;
-            });
-          },
-        ),
+            Text(
+              "Are you ?",
+              style: TextStyle(fontSize: 21, fontWeight: FontWeight.w500),
+            ),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                child: SizedBox(
+                  child: DropdownButton(
+                    hint: Text(
+                      "Chose",
+                      style: TextStyle(color: Colors.black, fontSize: 18),
+                    ),
+                    value: selectedItem,
+                    items:
+                        gender
+                            .map(
+                              (v) => DropdownMenuItem(child: Text(v), value: v),
+                            )
+                            .toList(),
+                    onChanged: (value) {
+                      selectedItem = value;
+                      setState(() {});
+                    },
+                  ),
+                ),
+              ),
+            ),
+            Text(
+              "Your age level ?",
+              style: TextStyle(fontSize: 21, fontWeight: FontWeight.w500),
+            ),
+            Card(
+              child: SizedBox(
+                height: 50,
+                width: 80,
+                child: Center(
+                  child: DropdownButton(
+                    dropdownColor: Colors.greenAccent,
+                    hint: Text("Age"),
+                    value: selectedage,
+                    items:
+                        age
+                            .map(
+                              (val) => DropdownMenuItem(
+                                child: Text(val),
+                                value: val,
+                              ),
+                            )
+                            .toList(),
+                    onChanged: (value){
+                      selectedage = value;
+                      setState(() {
+                        
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ),
+
             RadioButtonCard(
               question: 'What is your age level ?',
               op1: '20-25',
