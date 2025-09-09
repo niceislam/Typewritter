@@ -1,5 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+
 int selectedvalue = 1;
+
 class RadioButtonCard extends StatelessWidget {
   const RadioButtonCard({
     super.key,
@@ -21,7 +25,12 @@ class RadioButtonCard extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.sizeOf(context).width,
         child: Padding(
-          padding: const EdgeInsets.only(left: 10, top: 5, bottom: 5, right: 10),
+          padding: const EdgeInsets.only(
+            left: 10,
+            top: 5,
+            bottom: 5,
+            right: 10,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -35,7 +44,6 @@ class RadioButtonCard extends StatelessWidget {
                 groupValue: selectedvalue,
                 onChanged: (value) {
                   selectedvalue = value!;
-
                 },
               ),
               RadioListTile(
@@ -66,6 +74,45 @@ class RadioButtonCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class LoginTextfield extends StatelessWidget {
+  const LoginTextfield({
+    super.key,
+    this.hinttext,
+    this.preIcon,
+    this.validator,
+    this.controller,
+
+    this.suficonontap,
+  });
+  final String? hinttext;
+  final Icon? preIcon;
+  final FormFieldValidator? validator;
+  final TextEditingController? controller;
+  // final bool obsecuretext;
+  // final Icon? sufixIcon;
+  final VoidCallback? suficonontap;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        hintText: "${hinttext}",
+        prefixIcon: preIcon,
+        suffixIcon: InkWell(
+            child: Icon(Icons.visibility)),
+        fillColor: Colors.black.withOpacity(0.12),
+        filled: true,
+        border: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(5),
+        ),
+      ),
+      validator: validator,
     );
   }
 }

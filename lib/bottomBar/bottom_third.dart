@@ -25,20 +25,31 @@ class _BottomThirdState extends State<BottomThird> {
                   ),
                   actions: [
                     InkWell(
-                      onTap: (){
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (c)=> HomeScreen()));
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (c) => HomeScreen()),
+                        );
                       },
                       child: Card(
                         color: Colors.red,
                         child: SizedBox(
                           height: 40,
                           width: 80,
-                          child: Center(child: Text("Yes", style: TextStyle(color: Colors.white, fontSize: 20),)),
+                          child: Center(
+                            child: Text(
+                              "Yes",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         Navigator.pop(context);
                       },
                       child: Card(
@@ -46,7 +57,15 @@ class _BottomThirdState extends State<BottomThird> {
                         child: SizedBox(
                           height: 40,
                           width: 80,
-                          child: Center(child: Text("No", style: TextStyle(color: Colors.white, fontSize: 20),)),
+                          child: Center(
+                            child: Text(
+                              "No",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),

@@ -19,13 +19,14 @@ class _HomeScreenState extends State<HomeScreen> {
     BottomFirstScreen(),
     BottomSecond(),
     BottomThird(),
-    BottomForth()
+    BottomForth(),
   ];
   int index = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Colors.indigo,
         centerTitle: true,
         title: Text(
@@ -37,11 +38,118 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            Container(
+              height: 200,
+              width: MediaQuery.sizeOf(context).width,
+              color: Colors.blue,
+              child: Center(
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Colors.white,
+                  backgroundImage: NetworkImage(
+                    "https://docs.flutter.dev/assets/images/flutter-logo-sharing.png",
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                spacing: 2,
+                children: [
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: MediaQuery.sizeOf(context).width,
+                        child: Text("Emoji", style: TextStyle(fontSize: 20)),
+                      ),
+                    ),
+                  ),
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: MediaQuery.sizeOf(context).width,
+                        child: Text("Emoji", style: TextStyle(fontSize: 20)),
+                      ),
+                    ),
+                  ),
+                  ExpansionTile(
+                    title: Text("Courses", style: TextStyle(fontSize: 20)),
+                    children: [
+                      Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                            width: MediaQuery.sizeOf(context).width,
+                            child: Text(
+                              "Comment",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                            width: MediaQuery.sizeOf(context).width,
+                            child: Text(
+                              "Comment",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                            width: MediaQuery.sizeOf(context).width,
+                            child: Text(
+                              "Comment",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: MediaQuery.sizeOf(context).width,
+                        child: Text("Comment", style: TextStyle(fontSize: 20)),
+                      ),
+                    ),
+                  ),
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: MediaQuery.sizeOf(context).width,
+                        child: Text("Emoji", style: TextStyle(fontSize: 20)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+
       body: bodyScreen[index],
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.amber,
         onPressed: () {},
-        child: Icon(CupertinoIcons.moon_fill, size: 30,color: Colors.black,),
+        child: Icon(CupertinoIcons.moon_fill, size: 30, color: Colors.black),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
