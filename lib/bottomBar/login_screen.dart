@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:bottombar/bottomBar/Home_screen.dart';
-import 'package:bottombar/bottomBar/widget_all.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,132 +11,152 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailcontroller = TextEditingController();
-  TextEditingController passcontroller = TextEditingController();
   final mykey = GlobalKey<FormState>();
-  bool tapIcon = false;
+  bool tapeye = true;
+  TextEditingController mailcontroller = TextEditingController();
+  TextEditingController passcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
+      body: Container(
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.sizeOf(context).height,
+          maxWidth: MediaQuery.sizeOf(context).width,
+        ),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.centerRight,
+            colors: [Colors.blue.shade800, Colors.blue.shade500],
+          ),
+        ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 300,
-              width: MediaQuery.sizeOf(context).width,
-              color: Colors.blue,
+            Expanded(
+              flex: 2,
               child: Padding(
-                padding: const EdgeInsets.only(top: 105, left: 15),
+                padding: const EdgeInsets.only(left: 15, bottom: 25),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
                       "Login",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 55,
                       ),
                     ),
                     Text(
                       "Enter a beautiful world",
-                      style: TextStyle(color: Colors.white, fontSize: 28),
+                      style: TextStyle(color: Colors.white, fontSize: 30),
                     ),
                   ],
                 ),
               ),
             ),
-            Transform.translate(
-              offset: Offset(0, -60),
+            Expanded(
+              flex: 4,
               child: Container(
-                height: 556,
-                width: MediaQuery.sizeOf(context).width,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(35),
-                    topRight: Radius.circular(35),
-                  ),
                   color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(30),
+                  ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 120, left: 25, right: 25),
+                  padding: const EdgeInsets.only(top: 120, left: 35, right: 35),
                   child: Form(
                     key: mykey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        LoginTextfield(
-                          controller: emailcontroller,
-                          hinttext: "Your Email",
-                          preIcon: Icon(Icons.mail_outline, size: 28),
+                        _buildTextFormField(
+                          controller: mailcontroller,
+                          hinttext: 'Your Email',
+                          preIcon: Icon(Icons.mail_outlined, size: 28),
+                          obsecuretext: false,
                           validator: (value) {
                             if (value == null || value == "") {
-                              return "Field can't be empty";
+                              return "field can't be empty";
                             } else if (!value.contains("@") ||
                                 !value.contains(".")) {
-                              return "Wrong email";
-                            } else if (value == "nice@gmail.com") {
-                              return "";
+                              return "Invalid email";
                             } else {
-                              return "wrong user";
+                              return "";
                             }
                           },
-                          obsecuretext: false,
                         ),
-                        SizedBox(height: 25),
-                        LoginTextfield(
+                        SizedBox(height: 15),
+                        _buildTextFormField(
                           controller: passcontroller,
-                          hinttext: "Password",
-                          preIcon: Icon(Icons.lock_outline, size: 28),
+                          sufixIcon: InkWell(
+                            onTap: () {
+                              tapeye = !tapeye;
+                              setState(() {});
+                            },
+                            child:
+                                !tapeye == true
+                                    ? Icon(Icons.visibility)
+                                    : Icon(Icons.visibility_off),
+                          ),
+                          hinttext: 'Password',
+                          preIcon: Icon(
+                            Icons.lock_outline,
+                            size: 28,
+                            color: Colors.black,
+                          ),
+                          obsecuretext: tapeye,
                           validator: (value) {
                             if (value == null || value == "") {
-                              return "Field can't be empty";
-                            } else if (value == "12345678") {
-                              return "";
-                            } else if (value.length > 8){
-                              return "please short password";
-                            }else{return "wrong user";}
+                              return "field can't be empty";
+                            } else if (value.length < 8) {
+                              return "Password is short";
+                            } else if (!(RegExp('[A-Z]').hasMatch(value) &&
+                                RegExp('[a-z]').hasMatch(value) &&
+                                RegExp('[0-9]').hasMatch(value))) {
+                              return "Password not secure";
+                            }
                           },
-                          obsecuretext: !tapIcon,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Checkbox(
-                                  activeColor: Colors.blue,
-                                  value: tapIcon,
-                                  onChanged: (value) {
-                                    tapIcon = !tapIcon;
-                                    setState(() {});
-                                  },
-                                ),
-                                Text("Show password"),
-                              ],
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                textAlign: TextAlign.end,
-                                "Forgot password",
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ],
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "Forget password",
+                            style: TextStyle(color: Colors.blue, fontSize: 17),
+                          ),
                         ),
-                        SizedBox(height: 50),
+                        SizedBox(height: 40),
                         InkWell(
                           onTap: () {
-                            log(
-                              "==============${emailcontroller.text}==============${passcontroller.text}",
-                            );
                             if (mykey.currentState!.validate()) {
                               return;
+                            }
+                            if (mailcontroller.text ==
+                                    "mdniceislam@gmail.com" &&
+                                passcontroller.text == "Nice64512") {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (c) => HomeScreen()),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  showCloseIcon: true,
+                                  backgroundColor: Colors.red,
+                                  content: Text(
+                                    "Login Failed",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 22,
+                                    ),
+                                  ),
+                                ),
+                              );
+                              log("==========login failed");
                             }
                           },
                           child: Container(
@@ -152,12 +171,31 @@ class _LoginScreenState extends State<LoginScreen> {
                                 "LOGIN",
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 25,
+                                  fontSize: 22,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
                           ),
+                        ),
+                        SizedBox(height: 40),
+                        Row(
+                          children: [
+                            Text(
+                              "Don't Have An Account?",
+                              style: TextStyle(fontSize: 17),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "Register now",
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 17,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -166,6 +204,32 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  TextFormField _buildTextFormField({
+    required String hinttext,
+    required Icon preIcon,
+    FormFieldValidator? validator,
+    required bool obsecuretext,
+    InkWell? sufixIcon,
+    TextEditingController? controller,
+  }) {
+    return TextFormField(
+      controller: controller,
+      obscureText: obsecuretext,
+      validator: validator,
+      decoration: InputDecoration(
+        suffixIcon: sufixIcon,
+        hintText: "${hinttext}",
+        prefixIcon: preIcon,
+        fillColor: Colors.black.withOpacity(0.11),
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide.none,
         ),
       ),
     );
