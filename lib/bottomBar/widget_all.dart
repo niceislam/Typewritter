@@ -78,3 +78,40 @@ class RadioButtonCard extends StatelessWidget {
   }
 }
 
+class RegisterTextfield extends StatelessWidget {
+  const RegisterTextfield({
+    super.key, this.hittext, this.preIcon, this.validator, this.controller,
+  });
+  final String? hittext;
+  final IconData? preIcon;
+  final FormFieldValidator? validator;
+  final TextEditingController? controller;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(spacing: 8,
+      children: [
+        Icon(preIcon,color: Colors.blue,),
+        Expanded(
+          child: TextFormField(
+            controller: controller,
+            style: TextStyle(
+              fontSize: 18,
+            ),
+            cursorHeight: 23,
+            cursorColor: Colors.blue,
+            decoration: InputDecoration(
+              focusColor: Colors.blue,
+              hintText: "${hittext}",
+              contentPadding: EdgeInsets.symmetric(
+                vertical: 10,
+              ),
+            ),
+            validator: validator,
+          ),
+        ),
+      ],
+    );
+  }
+}
