@@ -2,6 +2,8 @@ import 'package:bottombar/bottomBar/bottom_first_screen.dart';
 import 'package:bottombar/bottomBar/bottom_forth.dart';
 import 'package:bottombar/bottomBar/bottom_second.dart';
 import 'package:bottombar/bottomBar/bottom_third.dart';
+import 'package:bottombar/bottomBar/login_screen.dart';
+import 'package:bottombar/bottomBar/widget_all.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:typewritertext/typewritertext.dart';
@@ -59,83 +61,91 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
-                spacing: 2,
+                spacing: 5,
                 children: [
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        width: MediaQuery.sizeOf(context).width,
-                        child: Text("Emoji", style: TextStyle(fontSize: 20)),
+                  ListTile(
+                    title: Text(
+                      "My file",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
+                    leading: Icon(Icons.file_open),
                   ),
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        width: MediaQuery.sizeOf(context).width,
-                        child: Text("Emoji", style: TextStyle(fontSize: 20)),
+                  ListTile(
+                    title: Text(
+                      "Shared with me",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
+                    leading: Icon(Icons.person),
+                  ),
+                  ListTile(
+                    title: Text(
+                      "Stared",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    leading: Icon(Icons.star),
                   ),
                   ExpansionTile(
-                    title: Text("Courses", style: TextStyle(fontSize: 20)),
+                    title: Text("Others"),
                     children: [
-                      Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            width: MediaQuery.sizeOf(context).width,
-                            child: Text(
-                              "Comment",
-                              style: TextStyle(fontSize: 20),
-                            ),
+                      ListTile(
+                        title: Text(
+                          "Recent",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
+                        leading: Icon(Icons.recent_actors),
                       ),
-                      Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            width: MediaQuery.sizeOf(context).width,
-                            child: Text(
-                              "Comment",
-                              style: TextStyle(fontSize: 20),
-                            ),
+                      ListTile(
+                        title: Text(
+                          "Offline",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
+                        leading: Icon(Icons.offline_bolt),
                       ),
-                      Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            width: MediaQuery.sizeOf(context).width,
-                            child: Text(
-                              "Comment",
-                              style: TextStyle(fontSize: 20),
-                            ),
+                      ListTile(
+                        title: Text(
+                          "Trash",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
+                        leading: Icon(Icons.delete),
                       ),
                     ],
                   ),
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        width: MediaQuery.sizeOf(context).width,
-                        child: Text("Comment", style: TextStyle(fontSize: 20)),
+
+                  ShowDialogue(
+                    ontapyes: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (c) => LoginScreen()),
+                      );
+                    },
+                    ontapno: (){Navigator.pop(context);},
+                    child: ListTile(
+                      title: Text(
+                        "Log out",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                  ),
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        width: MediaQuery.sizeOf(context).width,
-                        child: Text("Emoji", style: TextStyle(fontSize: 20)),
-                      ),
+                      leading: Icon(Icons.logout),
                     ),
                   ),
                 ],
@@ -144,7 +154,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-
       body: bodyScreen[index],
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.amber,
@@ -171,3 +180,5 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+

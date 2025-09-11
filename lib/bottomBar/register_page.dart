@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:bottombar/bottomBar/login_screen.dart';
+import 'package:bottombar/bottomBar/register_Data.dart';
 import 'package:bottombar/bottomBar/widget_all.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +13,11 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  bool tap2eye = false;
+  bool tap3eye = false;
+  TextEditingController mailcontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
+  TextEditingController conpasscontroller = TextEditingController();
   final fieldkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -38,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        height: MediaQuery.sizeOf(context).height / 2,
+                        height: MediaQuery.sizeOf(context).height / 1.8,
                         width: MediaQuery.sizeOf(context).width,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
@@ -54,23 +62,112 @@ class _RegisterPageState extends State<RegisterPage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               RegisterTextfield(
+                                controller: mailcontroller,
                                 preIcon: Icons.mail,
                                 hittext: "Email",
+                                validator: (value) {
+                                  if (value == null || value == "") {
+                                    return "field can't be empty";
+                                  } else if (!value.contains('@') ||
+                                      !value.contains('.')) {
+                                    return "Invalid email address";
+                                  } else {
+                                    return null;
+                                  }
+                                }, obsecuretext: false,
                               ),
+                              SizedBox(height: 10),
                               RegisterTextfield(
-                                preIcon: Icons.mail,
-                                hittext: "Email",
+                                obsecuretext: !tap3eye,
+                                sufIcon: InkWell(
+                                  onTap: () {
+                                    tap3eye = !tap3eye;
+                                    setState(() {
+
+                                    });
+                                  },
+                                  child:
+                                  tap3eye == true
+                                      ? Icon(Icons.visibility, size: 26)
+                                      : Icon(Icons.visibility_off, size: 26),
+                                ),
+                                controller: passwordcontroller,
+                                preIcon: Icons.lock,
+                                hittext: "Password",
+                                validator: (value) {
+                                  if (value == null || value == "") {
+                                    return "Enter a password";
+                                  } else if (value.length <= 8) {
+                                    return "Enter a long password";
+                                  } else if (!(RegExp(
+                                        '[A-Z]',
+                                      ).hasMatch(value) &&
+                                      RegExp('[a-z]').hasMatch(value) &&
+                                      RegExp('[0-9]').hasMatch(value))) {
+                                    return "Enter a strong password";
+                                  } else {
+                                    return null;
+                                  }
+                                },
                               ),
+                              SizedBox(height: 10),
                               RegisterTextfield(
-                                preIcon: Icons.mail,
-                                hittext: "Email",
+                                obsecuretext: !tap2eye,
+                                sufIcon: InkWell(
+                                  onTap: () {
+                                    tap2eye = !tap2eye;
+                                    setState(() {
+
+                                    });
+                                  },
+                                  child:
+                                      tap2eye == true
+                                          ? Icon(Icons.visibility, size: 26)
+                                          : Icon(Icons.visibility_off, size: 26),
+                                ),
+                                controller: conpasscontroller,
+                                preIcon: Icons.password,
+                                hittext: "Confirm Password",
+                                validator: (value) {
+                                  if (value == null || value == "") {
+                                    return "field can't empty";
+                                  } else if (!(value ==
+                                      passwordcontroller.text)) {
+                                    return "Enter a valid password";
+                                  } else {
+                                    return null;
+                                  }
+                                },
                               ),
                               SizedBox(height: 20),
                               InkWell(
                                 onTap: () {
-                                  if (fieldkey.currentState!.validate()) {
+                                  if (!fieldkey.currentState!.validate()) {
                                     return;
                                   }
+                                  registrationInfo.add({
+                                    "email": "${mailcontroller.text}",
+                                    "password": "${passwordcontroller.text}",
+                                  });
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      duration: Duration(seconds: 3),
+                                      backgroundColor: Colors.pinkAccent,
+                                      showCloseIcon: true,
+                                      content: Text(
+                                        "Registration successful",
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      closeIconColor: Colors.white,
+                                    ),
+                                  );
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (c) => LoginScreen(),
+                                    ),
+                                  );
+                                  setState(() {});
                                 },
                                 child: Container(
                                   height: 50,
@@ -95,6 +192,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       style: TextStyle(
                                         fontSize: 23,
                                         fontWeight: FontWeight.bold,
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ),

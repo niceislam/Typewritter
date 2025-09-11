@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:bottombar/bottomBar/Home_screen.dart';
+import 'package:bottombar/bottomBar/register_Data.dart';
 import 'package:bottombar/bottomBar/register_page.dart';
 import 'package:flutter/material.dart';
 
@@ -89,11 +90,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 validator: (value) {
                                   if (value == null || value == "") {
                                     return "field can't be empty";
-                                  } else if (!value.contains("@") ||
-                                      !value.contains(".")) {
-                                    return "Invalid email";
                                   } else {
-                                    return "";
+                                    return null;
                                   }
                                 },
                               ),
@@ -120,14 +118,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 validator: (value) {
                                   if (value == null || value == "") {
                                     return "field can't be empty";
-                                  } else if (value.length < 8) {
-                                    return "Password is short";
-                                  } else if (!(RegExp(
-                                        '[A-Z]',
-                                      ).hasMatch(value) &&
-                                      RegExp('[a-z]').hasMatch(value) &&
-                                      RegExp('[0-9]').hasMatch(value))) {
-                                    return "Password not secure";
+                                  } else if (value.length <= 8) {
+                                    return "Enter a long password";
                                   }
                                 },
                               ),
@@ -144,12 +136,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               SizedBox(height: 40),
                               InkWell(
                                 onTap: () {
-                                  if (mykey.currentState!.validate()) {
+                                  log("=============666666666666");
+                                  if (!mykey.currentState!.validate()) {
                                     return;
-                                  }
+                                  };
+
+                                  log("=============5555555555");
                                   if (mailcontroller.text ==
-                                          "mdniceislam@gmail.com" &&
-                                      passcontroller.text == "Nice64512") {
+                                          registrationInfo[0]['email'] &&
+                                      passcontroller.text ==
+                                          registrationInfo[0]['password']) {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(

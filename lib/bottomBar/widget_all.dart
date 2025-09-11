@@ -80,38 +80,112 @@ class RadioButtonCard extends StatelessWidget {
 
 class RegisterTextfield extends StatelessWidget {
   const RegisterTextfield({
-    super.key, this.hittext, this.preIcon, this.validator, this.controller,
+    super.key,
+    this.hittext,
+    this.preIcon,
+    this.validator,
+    this.controller,
+    this.sufIcon, required this.obsecuretext,
   });
   final String? hittext;
   final IconData? preIcon;
   final FormFieldValidator? validator;
   final TextEditingController? controller;
-
+  final InkWell? sufIcon;
+  final bool obsecuretext;
 
   @override
   Widget build(BuildContext context) {
-    return Row(spacing: 8,
+    return Row(
+      spacing: 11,
       children: [
-        Icon(preIcon,color: Colors.blue,),
+        Icon(preIcon, color: Colors.blue),
         Expanded(
           child: TextFormField(
+            obscureText: obsecuretext,
             controller: controller,
-            style: TextStyle(
-              fontSize: 18,
-            ),
+            style: TextStyle(fontSize: 18),
             cursorHeight: 23,
             cursorColor: Colors.blue,
             decoration: InputDecoration(
+              suffixIcon: sufIcon,
               focusColor: Colors.blue,
               hintText: "${hittext}",
-              contentPadding: EdgeInsets.symmetric(
-                vertical: 10,
-              ),
+              contentPadding: EdgeInsets.symmetric(vertical: 10),
             ),
             validator: validator,
           ),
         ),
       ],
+    );
+  }
+}
+
+
+class ShowDialogue extends StatelessWidget {
+  const ShowDialogue({
+    super.key,
+    this.content,
+    this.ontapyes,
+    this.ontapno,
+    this.child,
+  });
+  final String? content;
+  final VoidCallback? ontapyes;
+  final VoidCallback? ontapno;
+  final Widget? child;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder:
+              (context) => AlertDialog(
+            content: Text(
+              "Are you log out from app ?",
+              style: TextStyle(fontSize: 19),
+            ),
+            title: Text("Confirmation"),
+            actions: [
+              InkWell(
+                onTap: ontapyes,
+                child: Card(
+                  color: Colors.red,
+                  child: SizedBox(
+                    height: 35,
+                    width: 70,
+                    child: Center(
+                      child: Text(
+                        "Yes",
+                        style: TextStyle(color: Colors.white, fontSize: 17),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: ontapno,
+                child: Card(
+                  color: Colors.green,
+                  child: SizedBox(
+                    height: 35,
+                    width: 70,
+                    child: Center(
+                      child: Text(
+                        "No",
+                        style: TextStyle(color: Colors.white, fontSize: 17),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+      child: child,
     );
   }
 }
