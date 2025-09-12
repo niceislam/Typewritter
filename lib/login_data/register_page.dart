@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:bottombar/bottomBar/login_screen.dart';
-import 'package:bottombar/bottomBar/register_Data.dart';
+import 'package:bottombar/login_data/login_screen.dart';
+import 'package:bottombar/login_data/register_Data.dart';
 import 'package:bottombar/bottomBar/widget_all.dart';
 import 'package:flutter/material.dart';
 
@@ -74,7 +74,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   } else {
                                     return null;
                                   }
-                                }, obsecuretext: false,
+                                },
+                                obsecuretext: false,
                               ),
                               SizedBox(height: 10),
                               RegisterTextfield(
@@ -82,14 +83,15 @@ class _RegisterPageState extends State<RegisterPage> {
                                 sufIcon: InkWell(
                                   onTap: () {
                                     tap3eye = !tap3eye;
-                                    setState(() {
-
-                                    });
+                                    setState(() {});
                                   },
                                   child:
-                                  tap3eye == true
-                                      ? Icon(Icons.visibility, size: 26)
-                                      : Icon(Icons.visibility_off, size: 26),
+                                      tap3eye == true
+                                          ? Icon(Icons.visibility, size: 26)
+                                          : Icon(
+                                            Icons.visibility_off,
+                                            size: 26,
+                                          ),
                                 ),
                                 controller: passwordcontroller,
                                 preIcon: Icons.lock,
@@ -116,14 +118,15 @@ class _RegisterPageState extends State<RegisterPage> {
                                 sufIcon: InkWell(
                                   onTap: () {
                                     tap2eye = !tap2eye;
-                                    setState(() {
-
-                                    });
+                                    setState(() {});
                                   },
                                   child:
                                       tap2eye == true
                                           ? Icon(Icons.visibility, size: 26)
-                                          : Icon(Icons.visibility_off, size: 26),
+                                          : Icon(
+                                            Icons.visibility_off,
+                                            size: 26,
+                                          ),
                                 ),
                                 controller: conpasscontroller,
                                 preIcon: Icons.password,
@@ -145,10 +148,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                   if (!fieldkey.currentState!.validate()) {
                                     return;
                                   }
-                                  registrationInfo.add({
+                                  Map<String, dynamic> registerData = {
                                     "email": "${mailcontroller.text}",
                                     "password": "${passwordcontroller.text}",
-                                  });
+                                  };
+                                  registrationInfo.add(registerData);
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       duration: Duration(seconds: 3),

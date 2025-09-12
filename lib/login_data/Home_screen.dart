@@ -2,7 +2,7 @@ import 'package:bottombar/bottomBar/bottom_first_screen.dart';
 import 'package:bottombar/bottomBar/bottom_forth.dart';
 import 'package:bottombar/bottomBar/bottom_second.dart';
 import 'package:bottombar/bottomBar/bottom_third.dart';
-import 'package:bottombar/bottomBar/login_screen.dart';
+import 'package:bottombar/login_data/login_screen.dart';
 import 'package:bottombar/bottomBar/widget_all.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

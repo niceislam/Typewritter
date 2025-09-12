@@ -1,7 +1,7 @@
 import 'dart:developer';
-import 'package:bottombar/bottomBar/Home_screen.dart';
-import 'package:bottombar/bottomBar/register_Data.dart';
-import 'package:bottombar/bottomBar/register_page.dart';
+import 'package:bottombar/login_data/Home_screen.dart';
+import 'package:bottombar/login_data/register_Data.dart';
+import 'package:bottombar/login_data/register_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -139,9 +139,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   log("=============666666666666");
                                   if (!mykey.currentState!.validate()) {
                                     return;
-                                  };
+                                  }
+                                  ;
 
                                   log("=============5555555555");
+
                                   if (mailcontroller.text ==
                                           registrationInfo[0]['email'] &&
                                       passcontroller.text ==
