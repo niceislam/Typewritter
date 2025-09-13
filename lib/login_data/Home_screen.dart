@@ -4,6 +4,7 @@ import 'package:bottombar/bottomBar/bottom_second.dart';
 import 'package:bottombar/bottomBar/bottom_third.dart';
 import 'package:bottombar/login_data/login_screen.dart';
 import 'package:bottombar/bottomBar/widget_all.dart';
+import 'package:bottombar/note_app/note_add.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:typewritertext/typewritertext.dart';
@@ -216,8 +217,9 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.amber,
         onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (c) => NoteAdd()));
         },
-        child: Icon(CupertinoIcons.moon_fill, size: 30, color: Colors.black),
+        child: Icon(CupertinoIcons.add, size: 30, color: Colors.black),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(

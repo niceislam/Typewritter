@@ -83,9 +83,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               _buildTextFormField(
+                                cursorcolor: Colors.blue,
                                 controller: mailcontroller,
                                 hinttext: 'Your Email',
-                                preIcon: Icon(Icons.mail_outlined, size: 28),
+                                preIcon: Icon(Icons.mail_outline, size: 28),
                                 obsecuretext: false,
                                 validator: (value) {
                                   if (value == null || value == "") {
@@ -122,6 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     return "Enter a long password";
                                   }
                                 },
+                                cursorcolor: Colors.blue,
                               ),
                               TextButton(
                                 onPressed: () {},
@@ -238,8 +240,10 @@ class _LoginScreenState extends State<LoginScreen> {
     required bool obsecuretext,
     InkWell? sufixIcon,
     TextEditingController? controller,
+    required Color? cursorcolor,
   }) {
     return TextFormField(
+      cursorColor: cursorcolor,
       controller: controller,
       obscureText: obsecuretext,
       validator: validator,

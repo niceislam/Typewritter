@@ -210,7 +210,11 @@ class CustomTxtfld extends StatelessWidget {
     this.txtfldBorder,
     this.sufIcon,
     this.hittext,
-    this.validator, this.preIcons, this.cursorcolor, this.maxline, this.maxlength,
+    this.validator,
+    this.preIcons,
+    this.cursorcolor,
+    this.maxline,
+    this.maxlength,
   });
 
   final bool obsecuretext;
@@ -252,7 +256,18 @@ class CustomTxtfld extends StatelessWidget {
 }
 
 class NoteContainer extends StatelessWidget {
-  const NoteContainer({super.key});
+  const NoteContainer({
+    super.key,
+    required this.title,
+    required this.note,
+    required this.time,
+    this.conColor, required this.Icondelete,
+  });
+  final String title;
+  final String note;
+  final String time;
+  final Color? conColor;
+  final Widget Icondelete;
 
   @override
   Widget build(BuildContext context) {
@@ -260,7 +275,7 @@ class NoteContainer extends StatelessWidget {
       width: MediaQuery.sizeOf(context).width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Colors.greenAccent,
+        color: conColor,
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -268,17 +283,17 @@ class NoteContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Title",
+              "${title}",
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w500,
                 fontSize: 25,
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 10),
             Text(
               maxLines: 2,
-              "ami nice amar akta vatija ace khub sunasdfasdfasdfasdfasdfdor, khub khela kore ",
+              "${note}",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 20,
@@ -293,7 +308,7 @@ class NoteContainer extends StatelessWidget {
                   children: [
                     Icon(CupertinoIcons.clock, size: 22),
                     Text(
-                      "${DateTime.now().toString().substring(10, 16)}",
+                      "${time.toString().substring(10, 16)}",
                       style: TextStyle(color: Colors.black, fontSize: 18),
                     ),
                   ],
@@ -303,8 +318,7 @@ class NoteContainer extends StatelessWidget {
                   child: Row(
                     spacing: 15,
                     children: [
-                      Icon(Icons.edit, size: 40),
-                      Icon(Icons.delete, size: 40),
+                      Icondelete
                     ],
                   ),
                 ),

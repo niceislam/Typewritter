@@ -1,5 +1,10 @@
+import 'dart:developer';
+
+import 'package:bottombar/bottomBar/bottom_first_screen.dart';
 import 'package:bottombar/bottomBar/widget_all.dart';
 import 'package:flutter/material.dart';
+
+import '../login_data/register_Data.dart';
 
 class NoteAdd extends StatefulWidget {
   const NoteAdd({super.key});
@@ -9,6 +14,8 @@ class NoteAdd extends StatefulWidget {
 }
 
 class _NoteAddState extends State<NoteAdd> {
+  TextEditingController titlecontroller = TextEditingController();
+  TextEditingController notecontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +25,7 @@ class _NoteAddState extends State<NoteAdd> {
         child: Padding(
           padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
           child: Column(
+            spacing: 20,
             children: [
               Container(
                 width: MediaQuery.sizeOf(context).width,
@@ -33,6 +41,7 @@ class _NoteAddState extends State<NoteAdd> {
                   child: Column(
                     children: [
                       CustomTxtfld(
+                        controller: titlecontroller,
                         maxline: 2,
                         obsecuretext: false,
                         hittext: "Title",
@@ -41,7 +50,7 @@ class _NoteAddState extends State<NoteAdd> {
                         ),
                       ),
                       CustomTxtfld(
-                        maxlength: 120,
+                        controller: notecontroller,
                         maxline: 8,
                         hittext: "Write here",
                         obsecuretext: false,
@@ -53,7 +62,28 @@ class _NoteAddState extends State<NoteAdd> {
                   ),
                 ),
               ),
-
+              SizedBox(
+                height: 50,
+                width: MediaQuery.sizeOf(context).width / 2,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(Colors.indigo),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    NoteList.add({
+                      "title": "${titlecontroller.text}",
+                      "note": "${notecontroller.text}",
+                      "created_at": "${DateTime.now()}",
+                    });
+                    setState(() {});
+                  },
+                  child: Text(
+                    "ADD",
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
