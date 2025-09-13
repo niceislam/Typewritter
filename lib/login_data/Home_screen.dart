@@ -27,19 +27,75 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Colors.indigo,
-        centerTitle: true,
-        title: Text(
-          "BottomNavBar",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
+      appBar:
+          index == 0
+              ? AppBar(
+                iconTheme: IconThemeData(color: Colors.white),
+                backgroundColor: Colors.indigo,
+                centerTitle: true,
+                title: Text(
+                  "Your Note",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(70),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 1, left: 15, right: 15),
+                    child: Column(
+                      children: [
+                        CustomTxtfld(
+                          cursorcolor: Colors.indigo,
+                          hittext: "Search here",
+                          preIcons: Icon(Icons.search, color: Colors.indigo),
+                          filled: true,
+                          filcolor: Colors.white,
+                          obsecuretext: false,
+                          txtfldBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+              : index == 1
+              ? AppBar(
+                iconTheme: IconThemeData(color: Colors.white),
+                backgroundColor: Colors.indigo,
+                centerTitle: true,
+                title: Text(
+                  "2nd screen",
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
+              : index == 2
+              ? AppBar(
+                iconTheme: IconThemeData(color: Colors.white),
+                backgroundColor: Colors.indigo,
+                centerTitle: true,
+                title: Text(
+                  "3rd screen",
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
+              : index == 3
+              ? AppBar(
+                iconTheme: IconThemeData(color: Colors.white),
+                backgroundColor: Colors.indigo,
+                centerTitle: true,
+                title: Text(
+                  "4th screen",
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
+              : null,
       drawer: Drawer(
         child: Column(
           children: [
@@ -136,7 +192,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(builder: (c) => LoginScreen()),
                       );
                     },
-                    ontapno: (){Navigator.pop(context);},
+                    ontapno: () {
+                      Navigator.pop(context);
+                    },
                     child: ListTile(
                       title: Text(
                         "Log out",
@@ -157,7 +215,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: bodyScreen[index],
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.amber,
-        onPressed: () {},
+        onPressed: () {
+        },
         child: Icon(CupertinoIcons.moon_fill, size: 30, color: Colors.black),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -180,5 +239,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-
