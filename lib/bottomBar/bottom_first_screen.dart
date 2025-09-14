@@ -32,10 +32,9 @@ class _BottomFirstScreenState extends State<BottomFirstScreen> {
                           MaterialPageRoute(
                             builder:
                                 (c) => NoteDetails(
-                                  backcolor:
-                                      Notecolor[index % Notecolor.length],
-                                  note: "${NoteList[index]["note"]}",
+                                  backcolor: Notecolor[index],
                                   title: '${NoteList[index]['title']}',
+                                  note: '${NoteList[index]['note']}',
                                 ),
                           ),
                         );
