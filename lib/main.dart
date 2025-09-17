@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'localtest/local_test.dart';
 import 'login_data/Home_screen.dart';
 import 'login_data/login_screen.dart';
 import 'login_data/register_page.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomeScreen(),
+        home: LocalTestScreen(),
     );
   }
 }
