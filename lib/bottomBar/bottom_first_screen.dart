@@ -1,6 +1,6 @@
 import 'package:bottombar/bottomBar/widget_all.dart';
 import 'package:bottombar/login_data/register_Data.dart';
-import 'package:bottombar/note_app/note_details.dart';
+import 'package:bottombar/note_app/note_update.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +27,7 @@ class _BottomFirstScreenState extends State<BottomFirstScreen> {
                     padding: const EdgeInsets.only(top: 10),
                     child: InkWell(
                       onTap: () {
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -34,10 +35,13 @@ class _BottomFirstScreenState extends State<BottomFirstScreen> {
                                 (c) => NoteDetails(
                                   backcolor: Notecolor[index],
                                   title: '${NoteList[index]['title']}',
-                                  note: '${NoteList[index]['note']}',
+                                  note: '${NoteList[index]['note']}', index: index,
                                 ),
                           ),
                         );
+                        setState(() {
+
+                        });
                       },
                       child: NoteContainer(
                         Icondelete: InkWell(

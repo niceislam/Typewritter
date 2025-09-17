@@ -1,3 +1,4 @@
+import 'package:bottombar/login_data/register_Data.dart';
 import 'package:flutter/material.dart';
 
 import '../bottomBar/widget_all.dart';
@@ -8,10 +9,12 @@ class NoteDetails extends StatefulWidget {
     required this.backcolor,
     required this.title,
     required this.note,
+    required this.index,
   });
   final Color backcolor;
   final String title;
   final String note;
+  final int index;
 
   @override
   State<NoteDetails> createState() => _NoteDetailsState();
@@ -31,8 +34,18 @@ class _NoteDetailsState extends State<NoteDetails> {
         backgroundColor: Colors.white,
         actions: [
           InkWell(
-              onTap: (){},
-              child: Icon(Icons.check, size: 30)),
+            onTap: () {
+              Map<String, dynamic> update = {
+                "title": "${titlecontroller.text}",
+                "note": "${notecontroller.text}",
+                "created_at": "${DateTime.now()}",
+              };
+              NoteList.replaceRange(widget.index, widget.index + 1, [update]);
+              Navigator.pop(context);
+              setState(() {});
+            },
+            child: Icon(Icons.check, size: 30),
+          ),
           SizedBox(width: 10),
         ],
       ),
