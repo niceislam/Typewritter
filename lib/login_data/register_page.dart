@@ -152,6 +152,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     "email": "${mailcontroller.text}",
                                     "password": "${passwordcontroller.text}",
                                   };
+
                                   registrationInfo.add(registerData);
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:bottombar/Local_database/local_storage.dart';
 import 'package:bottombar/bottomBar/bottom_first_screen.dart';
 import 'package:bottombar/bottomBar/widget_all.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +77,7 @@ class _NoteAddState extends State<NoteAdd> {
                       "note": "${notecontroller.text}",
                       "created_at": "${DateTime.now()}",
                     });
+
                     setState(() {});
                   },
                   child: Text(

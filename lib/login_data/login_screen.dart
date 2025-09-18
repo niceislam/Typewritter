@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:bottombar/Local_database/local_storage.dart';
 import 'package:bottombar/login_data/Home_screen.dart';
 import 'package:bottombar/login_data/register_Data.dart';
 import 'package:bottombar/login_data/register_page.dart';
@@ -137,19 +138,22 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               SizedBox(height: 40),
                               InkWell(
-                                onTap: () {
-                                  log("=============666666666666");
+                                onTap: () async {
                                   if (!mykey.currentState!.validate()) {
                                     return;
                                   }
                                   ;
-
-                                  log("=============5555555555");
-
+                                  var a = await LocalStorage().readData(
+                                    key: "adListData",
+                                  );
                                   if (mailcontroller.text ==
                                           registrationInfo[0]['email'] &&
                                       passcontroller.text ==
                                           registrationInfo[0]['password']) {
+                                    await LocalStorage().writeData(
+                                      key: "Login",
+                                      value: "yes",
+                                    );
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(

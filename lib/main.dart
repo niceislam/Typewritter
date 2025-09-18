@@ -1,3 +1,4 @@
+import 'package:bottombar/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'localtest/local_test.dart';
 import 'login_data/Home_screen.dart';
@@ -15,8 +16,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: LocalTestScreen(),
+      debugShowCheckedModeBanner: false,
+      home: LocalTestScreen(),
     );
   }
 }

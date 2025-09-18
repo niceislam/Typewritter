@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:bottombar/Local_database/local_storage.dart';
 import 'package:bottombar/bottomBar/bottom_first_screen.dart';
 import 'package:bottombar/bottomBar/bottom_forth.dart';
 import 'package:bottombar/bottomBar/bottom_second.dart';
@@ -7,7 +10,6 @@ import 'package:bottombar/bottomBar/widget_all.dart';
 import 'package:bottombar/note_app/note_add.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:typewritertext/typewritertext.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -187,7 +189,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
 
                   ShowDialogue(
-                    ontapyes: () {
+                    ontapyes: () async {
+                      await LocalStorage().deleteData(key: "Login");
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (c) => LoginScreen()),
@@ -216,7 +219,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: bodyScreen[index],
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.amber,
-        onPressed: () {
+        onPressed: () async {
+          var result = await LocalStorage().readData(key: "adListData");
+          log("==============$result");
           Navigator.push(context, MaterialPageRoute(builder: (c) => NoteAdd()));
         },
         child: Icon(CupertinoIcons.add, size: 30, color: Colors.black),
